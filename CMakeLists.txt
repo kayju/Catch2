@@ -4,6 +4,7 @@ project(CatchSelfTest)
 
 option(USE_VALGRIND "Perform SelfTests with Valgrind" OFF)
 option(BUILD_EXAMPLES "Build documentation examples" OFF)
+option(GENERATE_COVERAGE "Generate coverage for codecov.io" OFF)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -303,6 +304,10 @@ if (NOT NO_SELFTEST)
     # Add desired warnings
     if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang|GNU" )
         target_compile_options( SelfTest PRIVATE -Wall -Wextra -Wunreachable-code -Werror )
+        if (GENERATE_COVERAGE)
+            target_compile_options( SelfTest PRIVATE -g -fprofile-arcs -ftest-coverage )
+            target_link_libraries( SelfTest PRIVATE --coverage )
+        endif()
     endif()
     # Clang specific warning go here
     if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
