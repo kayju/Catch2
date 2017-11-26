@@ -7,4 +7,7 @@ codecov:
 
 coverage:
   ignore:
-    - "reporters/*"
+    - "projects/SelfTest"
+    - "**/catch_reporter_tap.hpp"
+    - "**/catch_reporter_automake.hpp"
+    - "**/catch_reporter_teamcity.hpp"
