@@ -29,6 +29,8 @@ init:
   - git config --global core.autocrlf input
   # Set build version to git commit-hash
   - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
+  # Get OpenCppCoverage tool for codecov
+  - ps: if (($env:CONFIGURATION) -eq "Debug" ) { .\scripts\installOpenCppCoverage.ps1 }
 
 # fetch repository as zip archive
 shallow_clone: true
