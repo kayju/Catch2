@@ -51,6 +51,11 @@ matrix:
               packages: ['clang-5.0', 'valgrind', 'libstdc++-6-dev']
       env: COMPILER='clang++-5.0' CPP14=1 VALGRIND=1 COVERAGE=1
 
+    - os: osx
+      osx_image: xcode9.1
+      compiler: clang
+      env: COMPILER='clang++' COVERAGE=1      
+      
 install:
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
@@ -61,6 +66,8 @@ install:
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       which cmake || brew install cmake
+      which lcov || brew install lcov
+      which gcov || brew install gcov
     fi
 
 before_script:
