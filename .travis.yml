@@ -11,48 +11,6 @@ common_sources: &all_sources
 matrix:
   include:
 
-    # 1/ Linux Clang Builds
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['valgrind', 'lcov', 'clang-3.5']
-      env: COMPILER='clang++-3.5' VALGRIND=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['valgrind', 'lcov', 'clang-3.6']
-      env: COMPILER='clang++-3.6' VALGRIND=1
-
-# Travis's containers do not seem to have Clang 3.7 in apt, no matter what sources I add.
-#    - os: linux
-#      compiler: clang
-#      addons:
-#        apt:
-#          sources: *all_sources
-#          packages: ['valgrind', 'clang-3.7']
-#      env: COMPILER='clang++-3.7' VALGRIND=1
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['valgrind', 'lcov', 'clang-3.8']
-      env: COMPILER='clang++-3.8' VALGRIND=1
-
-    - os: linux
-      compiler: clang
-      addons:
-          apt:
-              sources: *all_sources
-              packages: ['clang-3.9', 'valgrind', 'lcov']
-      env: COMPILER='clang++-3.9' VALGRIND=1
-
     - os: linux
       compiler: clang
       addons:
@@ -95,41 +53,6 @@ matrix:
       env: COMPILER='g++-5' VALGRIND=1
 
     - os: linux
-      compiler: gcc
-      addons: &gcc6
-        apt:
-          sources: *all_sources
-          packages: ['valgrind', 'lcov', 'g++-6']
-      env: COMPILER='g++-6' VALGRIND=1
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc7
-        apt:
-          sources: *all_sources
-          packages: ['valgrind', 'lcov', 'g++-7']
-      env: COMPILER='g++-7' VALGRIND=1
-
-    # 3b/ Linux C++14 Clang builds
-    - os: linux
-      compiler: clang
-      addons:
-          apt:
-              packages: ['clang-3.8', 'valgrind', 'lcov', 'libstdc++-6-dev']
-              sources:
-                  - ubuntu-toolchain-r-test
-                  - llvm-toolchain-trusty
-      env: COMPILER='clang++-3.8' CPP14=1 VALGRIND=1
-
-    - os: linux
-      compiler: clang
-      addons:
-          apt:
-              sources: *all_sources
-              packages: ['clang-3.9', 'valgrind', 'lcov', 'libstdc++-6-dev']
-      env: COMPILER='clang++-3.9' CPP14=1 VALGRIND=1
-
-    - os: linux
       compiler: clang
       addons:
           apt:
@@ -144,39 +67,6 @@ matrix:
               sources: *all_sources
               packages: ['clang-5.0', 'valgrind', 'lcov', 'libstdc++-6-dev']
       env: COMPILER='clang++-5.0' CPP14=1 VALGRIND=1
-
-
-    # 4a/ Linux C++14 GCC builds
-    - os: linux
-      compiler: gcc
-      addons: *gcc6
-      env: COMPILER='g++-6' CPP14=1 VALGRIND=1
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc7
-      env: COMPILER='g++-7' CPP14=1 VALGRIND=1
-
-    # 5/ OSX Clang Builds
-    - os: osx
-      osx_image: xcode7.3
-      compiler: clang
-      env: COMPILER='clang++'
-
-    - os: osx
-      osx_image: xcode8
-      compiler: clang
-      env: COMPILER='clang++'
-
-    - os: osx
-      osx_image: xcode9
-      compiler: clang
-      env: COMPILER='clang++'
-
-    - os: osx
-      osx_image: xcode9.1
-      compiler: clang
-      env: COMPILER='clang++'
 
     - os: osx
       osx_image: xcode9.1
