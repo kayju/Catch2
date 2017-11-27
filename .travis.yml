@@ -71,7 +71,7 @@ before_script:
 
   - |
     # Use Debug builds for running Valgrind and building examples
-    cmake -H. -BBuild-Debug -DCMAKE_BUILD_TYPE=Debug -Wdev -DUSE_CPP14=${CPP14} -DUSE_VALGRIND=${VALGRIND} -DBUILD_EXAMPLES=ON -DGENERATE_COVERAGE=${COVERAGE}
+    cmake -H. -BBuild-Debug -DCMAKE_BUILD_TYPE=Debug -Wdev -DUSE_CPP14=${CPP14} -DUSE_VALGRIND=${VALGRIND} -DBUILD_EXAMPLES=ON -DENABLE_COVERAGE=${COVERAGE}
     # Don't bother with release build for coverage build
     if [[ -z ${COVERAGE} ]]; then
       cmake -H. -BBuild-Release -DCMAKE_BUILD_TYPE=Release -Wdev -DUSE_CPP14=${CPP14}
