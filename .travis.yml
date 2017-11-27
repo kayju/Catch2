@@ -89,5 +89,5 @@ script:
       make -j 2
       CTEST_OUTPUT_ON_FAILURE=1 ctest -j 2
     else
-      bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+      bash <(curl -s https://codecov.io/bash) -X gcov || echo "Codecov did not collect coverage reports"
     fi
