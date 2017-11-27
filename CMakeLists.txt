@@ -329,11 +329,11 @@ if (NOT NO_SELFTEST)
     add_test(NAME ListTags COMMAND $<TARGET_FILE:SelfTest> --list-tags)
     set_tests_properties(ListTags PROPERTIES PASS_REGULAR_EXPRESSION "[0-9]+ tags")
 
-    add_test(NAME ListTags COMMAND $<TARGET_FILE:SelfTest> --list-reporters)
-    set_tests_properties(ListTags PROPERTIES PASS_REGULAR_EXPRESSION "Available reporters:")
+    add_test(NAME ListReporters COMMAND $<TARGET_FILE:SelfTest> --list-reporters)
+    set_tests_properties(ListReporters PROPERTIES PASS_REGULAR_EXPRESSION "Available reporters:")
 
-    add_test(NAME ListTags COMMAND $<TARGET_FILE:SelfTest> --list-test-names-only)
-    set_tests_properties(ListTags PROPERTIES PASS_REGULAR_EXPRESSION "Regex string matcher")
+    add_test(NAME ListTestNamesOnly COMMAND $<TARGET_FILE:SelfTest> --list-test-names-only)
+    set_tests_properties(ListTestNamesOnly PROPERTIES PASS_REGULAR_EXPRESSION "Regex string matcher")
 
 
     # AppVeyor has a Python 2.7 in path, but doesn't have .py files as autorunnable
