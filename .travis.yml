@@ -65,9 +65,13 @@ install:
       mkdir cmake && travis_retry wget --no-check-certificate --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      which cmake || brew install cmake
-      which lcov || brew install lcov
-      which gcov || brew install gcov
+      for pkg in cmake lcov gcov; do
+        if brew list -1 | grep -q "^${pkg}\$"; then
+          brew outdated $pkg || brew upgrade $pkg;
+        else
+          brew install $pkg;
+        fi
+      done
     fi
 
 before_script:
