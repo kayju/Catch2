@@ -41,7 +41,7 @@ matrix:
           apt:
               sources: *all_sources
               packages: ['clang-4.0', 'valgrind', 'libstdc++-6-dev', 'lcov']
-      env: COMPILER='clang++-4.0' CPP14=1 VALGRIND=1 COVERAGE=1
+      env: COMPILER='clang++-4.0' CPP14=1 VALGRIND=1
 
     - os: linux
       compiler: clang
