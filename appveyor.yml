@@ -51,7 +51,7 @@ before_build:
   # 1) Get OpenCppCoverage tool for codecov
   # 2) Regenerate single header include for examples
   # 3) Enable building examples
-  - .\scripts\installOpenCppCoverage.ps1
+  - ps: if (($env:CONFIGURATION) -eq "Debug" ) { .\scripts\installOpenCppCoverage.ps1 }
   - python scripts\generateSingleHeader.py
   - cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON -DMSVC_COVERAGE=ON
 
