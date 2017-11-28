@@ -54,7 +54,7 @@ before_build:
   - ps: if (($env:CONFIGURATION) -eq "Debug" ) { .\scripts\installOpenCppCoverage.ps1 }
   - python scripts\generateSingleHeader.py
   # Prebuild memcheck redirecter
-  - cmake -Hbuild-misc -Bmisc -A%PLATFORM%
+  - cmake -Hmisc -Bbuild-misc -A%PLATFORM%
   - cmake --build build-misc
   - cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON -DMEMORYCHECK_COMMAND=build-misc\CoverageHelper -DMEMORYCHECK_COMMAND_OPTIONS=--sep-- -DMEMORYCHECK_TYPE=Valgrind
   - ps: if (($env:CONFIGURATION) -eq "Debug" ) { choco install codecov }
