@@ -53,7 +53,10 @@ before_build:
   # 3) Enable building examples
   - ps: if (($env:CONFIGURATION) -eq "Debug" ) { .\scripts\installOpenCppCoverage.ps1 }
   - python scripts\generateSingleHeader.py
-  - cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON -DMSVC_COVERAGE=ON
+  # Prebuild memcheck redirecter
+  - cmake -Hbuild-misc -Bmisc -A%PLATFORM%
+  - cmake --build build-misc
+  - cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON -DMEMORYCHECK_COMMAND=build-misc\CoverageHelper -DMEMORYCHECK_COMMAND_OPTIONS=--sep-- -DMEMORYCHECK_TYPE=Valgrind
   - ps: if (($env:CONFIGURATION) -eq "Debug" ) { choco install codecov }
 
 
@@ -66,7 +69,7 @@ build:
 test_script:
   - cd Build
   - set CTEST_OUTPUT_ON_FAILURE=1
-  - ctest -j 2 -C %CONFIGURATION%
+  - ctest -j 2 -C %CONFIGURATION% -D ExperimentalMemCheck
   - ps: |
       if (($env:CONFIGURATION) -eq "Debug" ) {
           codecov -f cobertura1.xml cobertura2.xml cobertura3.xml cobertura4.xml cobertura5.xml
