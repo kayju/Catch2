@@ -26,7 +26,7 @@ matrix:
           additional_flags: "/permissive- /std:c++latest"
 
 init:
-  - git config --global core.autocrlf input
+  - git config --global core.autocrlf true
   # Set build version to git commit-hash
   - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
 
