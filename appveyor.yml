@@ -47,11 +47,11 @@ configuration:
 #Cmake will autodetect the compiler, but we set the arch
 before_build:
   - set CXXFLAGS=%additional_flags%
-  # In debug build, we want to 
+  # In debug build, we want to
   # 1) Get OpenCppCoverage tool for codecov
   # 2) Regenerate single header include for examples
-  # 3) Enable building examples  
-  -  |
+  # 3) Enable building examples
+  - |
       if %CONFIGURATION%==Debug (
           .\scripts\installOpenCppCoverage.ps1;
           python scripts\generateSingleHeader.py;
@@ -60,7 +60,7 @@ before_build:
       if %CONFIGURATION%==Release (
           cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=OFF
       )
-      
+
 
 # build with MSBuild
 build:
