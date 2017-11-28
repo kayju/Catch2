@@ -29,8 +29,6 @@ init:
   - git config --global core.autocrlf input
   # Set build version to git commit-hash
   - ps: Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_BRANCH) - $($env:APPVEYOR_REPO_COMMIT)"
-  # Get OpenCppCoverage tool for codecov
-  - ps: if (($env:CONFIGURATION) -eq "Debug" ) { .\scripts\installOpenCppCoverage.ps1 }
 
 # fetch repository as zip archive
 shallow_clone: true
@@ -48,9 +46,20 @@ configuration:
 
 #Cmake will autodetect the compiler, but we set the arch
 before_build:
-  - python scripts/generateSingleHeader.py
   - set CXXFLAGS=%additional_flags%
-  - cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON
+  # In debug build, we want to 
+  # 1) Get OpenCppCoverage tool for codecov
+  # 2) Regenerate single header include for examples
+  # 3) Enable building examples  
+  - ps: |
+      if (($env:CONFIGURATION) -eq "Debug" ) {
+          .\scripts\installOpenCppCoverage.ps1;
+          python scripts\generateSingleHeader.py;
+          cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON
+      } else {
+          cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=OFF
+      }
+      
 
 # build with MSBuild
 build:
