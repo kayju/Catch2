@@ -340,7 +340,7 @@ if (NOT NO_SELFTEST)
         
             add_test(NAME ListTestNamesOnly COMMAND OpenCppCoverage --export_type cobertura:cobertura5.xml --quiet --sources C:\projects\catch2 -- $<TARGET_FILE:SelfTest> --list-test-names-only)
             set_tests_properties(ListTestNamesOnly PROPERTIES PASS_REGULAR_EXPRESSION "Regex string matcher")
-        else
+        else()
             add_test(NAME RunTests COMMAND $<TARGET_FILE:SelfTest>)
 
             add_test(NAME ListTests COMMAND $<TARGET_FILE:SelfTest> --list-tests --verbosity high)

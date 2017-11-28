@@ -55,9 +55,9 @@ before_build:
       if (($env:CONFIGURATION) -eq "Debug" ) {
           .\scripts\installOpenCppCoverage.ps1;
           python scripts\generateSingleHeader.py;
-          cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON
+          cmake . -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON
       } else {
-          cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=OFF
+          cmake . -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=OFF
       }
       
 
