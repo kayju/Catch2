@@ -71,3 +71,8 @@ test_script:
   - cd Build
   - set CTEST_OUTPUT_ON_FAILURE=1
   - ctest -j 2 -C %CONFIGURATION%
+  - ps: |
+      if (($env:CONFIGURATION) -eq "Debug" ) {
+          Start-FileDownload "https://codecov.io/bash" -FileName "codecov.sh";
+          bash ./codecov.sh -X nocolor -X gcov -F windows -f cobertura1.xml -f cobertura2.xml -f cobertura3.xml -f cobertura4.xml -f cobertura5.xml;
+      }
