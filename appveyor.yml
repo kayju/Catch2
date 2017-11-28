@@ -54,6 +54,7 @@ before_build:
   - ps: if (($env:CONFIGURATION) -eq "Debug" ) { .\scripts\installOpenCppCoverage.ps1 }
   - python scripts\generateSingleHeader.py
   - cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON -DMSVC_COVERAGE=ON
+  - ps: if (($env:CONFIGURATION) -eq "Debug" ) { choco install codecov }
 
 
 # build with MSBuild
@@ -67,7 +68,7 @@ test_script:
   - set CTEST_OUTPUT_ON_FAILURE=1
   - ctest -j 2 -C %CONFIGURATION%
   - ps: |
+      path=C:\Python35\Scripts;%path%
       if (($env:CONFIGURATION) -eq "Debug" ) {
-          Start-FileDownload "https://codecov.io/bash" -FileName "codecov.sh";
-          bash ./codecov.sh -X nocolor -X gcov -F windows -f cobertura1.xml -f cobertura2.xml -f cobertura3.xml -f cobertura4.xml -f cobertura5.xml;
+          .\codecov -X nocolor -X gcov -F windows -f cobertura1.xml -f cobertura2.xml -f cobertura3.xml -f cobertura4.xml -f cobertura5.xml
       }
