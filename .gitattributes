@@ -9,3 +9,10 @@
 
 # Windows specific files should retain windows line-endings
 *.sln text eol=crlf
+
+# Runnable files need to be LF for bash to read them properly
+*.py text eol=lf
+*.sh text eol=lf
+
+# This is used and ran on windows machines, maybe this will fix the eol issues :-)
+appveyor.yml text eol=crlf

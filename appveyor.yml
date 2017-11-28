@@ -52,12 +52,12 @@ before_build:
   # 2) Regenerate single header include for examples
   # 3) Enable building examples
   - cmd: >-
-      if %CONFIGURATION%==Debug (
+      if "%CONFIGURATION%"=="Debug" (
           .\scripts\installOpenCppCoverage.ps1;
           python scripts\generateSingleHeader.py;
           cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=ON -DMSVC_COVERAGE=ON
       )
-      if %CONFIGURATION%==Release (
+      if "%CONFIGURATION%"=="Release" (
           cmake -H. -BBuild -A%PLATFORM% -DUSE_WMAIN=%wmain% -DBUILD_EXAMPLES=OFF
       )
 
