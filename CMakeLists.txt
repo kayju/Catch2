@@ -327,18 +327,18 @@ if (NOT NO_SELFTEST)
     # configure unit tests via CTest
     enable_testing()
         if (MSVC_COVERAGE)
-            add_test(NAME RunTests COMMAND OpenCppCoverage --export_type cobertura:cobertura1.xml --quiet --sources C:\projects\catch2 -- $<TARGET_FILE:SelfTest>)
+            add_test(NAME RunTests COMMAND OpenCppCoverage --export_type cobertura:cobertura1.xml --quiet --sources C:\\projects\\catch2 -- $<TARGET_FILE:SelfTest>)
         
-            add_test(NAME ListTests COMMAND OpenCppCoverage --export_type cobertura:cobertura2.xml --quiet --sources C:\projects\catch2 -- $<TARGET_FILE:SelfTest> --list-tests --verbosity high)
+            add_test(NAME ListTests COMMAND OpenCppCoverage --export_type cobertura:cobertura2.xml --quiet --sources C:\\projects\\catch2 -- $<TARGET_FILE:SelfTest> --list-tests --verbosity high)
             set_tests_properties(ListTests PROPERTIES PASS_REGULAR_EXPRESSION "[0-9]+ test cases")
         
-            add_test(NAME ListTags COMMAND OpenCppCoverage --export_type cobertura:cobertura3.xml --quiet --sources C:\projects\catch2 -- $<TARGET_FILE:SelfTest> --list-tags)
+            add_test(NAME ListTags COMMAND OpenCppCoverage --export_type cobertura:cobertura3.xml --quiet --sources C:\\projects\\catch2 -- $<TARGET_FILE:SelfTest> --list-tags)
             set_tests_properties(ListTags PROPERTIES PASS_REGULAR_EXPRESSION "[0-9]+ tags")
         
-            add_test(NAME ListReporters COMMAND OpenCppCoverage --export_type cobertura:cobertura4.xml --quiet --sources C:\projects\catch2 -- $<TARGET_FILE:SelfTest> --list-reporters)
+            add_test(NAME ListReporters COMMAND OpenCppCoverage --export_type cobertura:cobertura4.xml --quiet --sources C:\\projects\\catch2 -- $<TARGET_FILE:SelfTest> --list-reporters)
             set_tests_properties(ListReporters PROPERTIES PASS_REGULAR_EXPRESSION "Available reporters:")
         
-            add_test(NAME ListTestNamesOnly COMMAND OpenCppCoverage --export_type cobertura:cobertura5.xml --quiet --sources C:\projects\catch2 -- $<TARGET_FILE:SelfTest> --list-test-names-only)
+            add_test(NAME ListTestNamesOnly COMMAND OpenCppCoverage --export_type cobertura:cobertura5.xml --quiet --sources C:\\projects\\catch2 -- $<TARGET_FILE:SelfTest> --list-test-names-only)
             set_tests_properties(ListTestNamesOnly PROPERTIES PASS_REGULAR_EXPRESSION "Regex string matcher")
         else()
             add_test(NAME RunTests COMMAND $<TARGET_FILE:SelfTest>)
